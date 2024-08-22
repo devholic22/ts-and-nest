@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('messages')
 export class MessagesController {
@@ -8,12 +8,12 @@ export class MessagesController {
     }
 
     @Post()
-    createMessages() {
-
+    createMessages(@Body() body: any) { // 유입되는 요청의 본문을 자동으로 추출하여 라우트 핸들러에 인수로 제공
+        console.log(body);
     }
 
     @Get('/:id')
-    getMessages() {
-
+    getMessages(@Param('id') id: string) {
+        console.log(id);
     }
 }
