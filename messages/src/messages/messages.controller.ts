@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateMessageDto } from './dtos/create-message.dto';
 
 @Controller('messages')
 export class MessagesController {
@@ -8,7 +9,8 @@ export class MessagesController {
     }
 
     @Post()
-    createMessages(@Body() body: any) { // 유입되는 요청의 본문을 자동으로 추출하여 라우트 핸들러에 인수로 제공
+    // 기존 any에서 CreateMessageDto로 수정 반영
+    createMessages(@Body() body: CreateMessageDto) { // 유입되는 요청의 본문을 자동으로 추출하여 라우트 핸들러에 인수로 제공
         console.log(body);
     }
 
