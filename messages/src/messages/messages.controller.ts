@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { CreateMessageDto } from './dtos/create-message.dto';
 import { MessagesService } from './messages.service';
 
@@ -24,7 +24,11 @@ export class MessagesController {
   }
 
   @Get('/:id')
-  getMessages(@Param('id') id: string) {
-    this.messagesService.findOne(id);
+  async getMessages(@Param('id') id: string) {
+    const message = await this.messagesService.findOne(id); // 데이터베이스 조회 작업이 이루어지므로 async-await 적용
+    if (!message) {
+      throw new NotFoundException('message not found'); // 404 연결
+    }
+    return message;
   }
 }
