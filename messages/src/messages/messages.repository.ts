@@ -1,0 +1,13 @@
+import { readFile, writeFile } from 'fs/promises';
+
+export class MessagesRepository {
+  async findOne(id: string) {
+    // 비동기 적용 필요: 하드 드라이브 등에서 읽어들이기 때문
+    const contents = await readFile('messages.json', 'utf8'); // messages.json 이용
+    const messages = JSON.parse(contents);
+
+    return messages[id];
+  }
+  async findAll() {}
+  async create(message: string) {}
+}
