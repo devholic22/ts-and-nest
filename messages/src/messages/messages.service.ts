@@ -1,10 +1,10 @@
+import { Injectable } from '@nestjs/common';
 import { MessagesRepository } from './messages.repository';
 
+@Injectable() // 스프링의 @Bean, @Component와 유사
 export class MessagesService {
-  messagesRepo: MessagesRepository;
-
-  constructor() {
-    // 서비스가 생성 시 실제 리포지토리 의존 (실제 앱에서는 추상화 필요)
+  constructor(public messagesRepo: MessagesRepository) {
+    // 인스턴스 주입
     this.messagesRepo = new MessagesRepository();
   }
 

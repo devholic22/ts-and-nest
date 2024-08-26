@@ -1,14 +1,19 @@
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { CreateMessageDto } from './dtos/create-message.dto';
 import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
-  messagesService: MessagesService;
-
-  constructor() {
-    // 이것도 여기에서 직접 의존하고 있다. 실제 코드에서는 권장 X
-    this.messagesService = new MessagesService();
+  constructor(public messagesService: MessagesService) {
+    // 인스턴스 주입
+    this.messagesService = messagesService;
   }
 
   @Get()

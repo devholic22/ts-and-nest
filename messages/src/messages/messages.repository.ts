@@ -1,5 +1,7 @@
+import { Injectable } from '@nestjs/common';
 import { readFile, writeFile } from 'fs/promises';
 
+@Injectable() // 스프링의 @Bean, @Component와 유사
 export class MessagesRepository {
   async findOne(id: string) {
     // 비동기 적용 필요: 하드 드라이브 등에서 읽어들이기 때문
